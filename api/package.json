@@ -1,7 +1,7 @@
 {
-  "name": "socialproject",
+  "name": "student-mentor-api",
   "version": "1.0.0",
-  "description": "Social Media Project",
+  "description": "Student Mentor API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
