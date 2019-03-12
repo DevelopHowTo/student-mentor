@@ -31,7 +31,7 @@ import {
   chartExample2,
   chartExample3,
   chartExample4
-} from "variables/charts.jsx";
+} from "../variables/charts.jsx";
 
 class Dashboard extends React.Component {
   constructor(props) {

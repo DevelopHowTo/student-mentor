@@ -172,7 +172,7 @@ class AdminNavbar extends React.Component {
                     onClick={e => e.preventDefault()}
                   >
                     <div className="photo">
-                      <img alt="..." src={require("assets/img/anime3.png")} />
+                      <img alt="..." src={require("../../assets/img/anime3.png")} />
                     </div>
                     <b className="caret d-none d-lg-block d-xl-block" />
                     <p className="d-lg-none">Log out</p>
