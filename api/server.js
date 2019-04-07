@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 const users = require("./routes/apis/users");
 const profile = require("./routes/apis/profile");
 const posts = require("./routes/apis/post");
@@ -27,6 +28,9 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/post", posts);
 
+app.get("*", (req,res,next) => {
+  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+})
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/StudentMentor")
   .then(() => {

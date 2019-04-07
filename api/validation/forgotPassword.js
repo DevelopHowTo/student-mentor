@@ -2,18 +2,18 @@ const Validator = require("validator");
 const isEmpty = require("./is_empty");
 
 module.exports = function validateForgotPassword(data) {
-  let errors = {};
+  let errors = { messages: [] };
 
   data.email = !isEmpty(data.email) ? data.email : "";
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = "Invalid Email Id";
+    errors.messages.push("Invalid Email Id");
   }
   if (Validator.isEmpty(data.email)) {
-    errors.email = "Email Field is required";
+    errors.messages.push("Email Field is required");
   }
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: errors.messages.length === 0
   };
 };

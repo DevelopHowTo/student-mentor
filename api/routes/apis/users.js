@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
 
     //Check Validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({ error: true, messages: errors.messages });
     }
 
     const user = await User.findOne({
@@ -54,14 +54,16 @@ router.post("/register", async (req, res) => {
       mobile: req.body.mobile
     });
     if (user) {
-      errors.email = "Email already exists";
+      errors.messages.push("User already exists!");
       return res.status(400).json({
-        errors: errors.email
+        error: true,
+        messages: errors.messages
       });
     } else if (userContact) {
-      errors.mobile = "Mobile no. is already register";
+      errors.messages.push("Mobile no. is already register");
       return res.status(400).json({
-        error: errors.mobile
+        error: true,
+        messages: errors.messages
       });
     } else {
       const avatar = gravatar.url(req.body.email, {
@@ -107,7 +109,7 @@ router.post("/register", async (req, res) => {
       });
     }
   } catch (e) {
-    res.status(404).json("Error occurs");
+    res.status(404).json("An Error occurred");
   }
 });
 
@@ -123,16 +125,17 @@ router.post("/login", async (req, res) => {
 
     //Check Validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({ error: true, messages: errors.messages });
     }
     const user = await User.findOne({
       email
     });
 
     if (!user) {
-      errors.email = "User not found";
+      errors.messages.push("Invalid email/password");
       res.status(404).json({
-        error: errors.email
+        error: true,
+        messages: errors.messages
       });
     }
     //check password
@@ -153,9 +156,10 @@ router.post("/login", async (req, res) => {
         token: "Bearer " + token
       });
     } else {
-      errors.password = "Password is incorrect";
+      errors.messages.push("Invalid email/password");
       return res.status(400).json({
-        password: errors.password
+        error: true,
+        messages: errors.messages
       });
     }
   } catch (e) {
@@ -173,7 +177,7 @@ router.post("/forgot", async (req, res) => {
 
   //Check Validation
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(400).json({ error: true, messages: errors.messages });
   }
 
   try {
@@ -182,9 +186,10 @@ router.post("/forgot", async (req, res) => {
     });
 
     if (!user) {
-      errors.email = "User not found";
+      errors.messages.push("User not found");
       return res.status(404).json({
-        error: errors.email
+        error: true,
+        messages: errors.messages
       });
     }
 
@@ -226,12 +231,12 @@ router.post("/reset/:token", async (req, res) => {
     });
 
     if (!user) {
-      errors.token = "Invalid token or expired token";
-      return res.status(400).json({ error: errors.token });
+      errors.messages.push("Invalid token or expired token");
+      return res.status(400).json({ error: true, messages: errors.messages });
     }
     //Check Validation
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(400).json({ error: true, messages: errors.messages });
     }
 
     user.password = req.body.password;
@@ -264,8 +269,9 @@ router.post("/reset/:token", async (req, res) => {
       });
     });
   } catch (error) {
-    errors.token = "Invalid token or expired token";
-    return res.status(400).json({ error: errors.token });
+    const errors = [];
+    errors.messages.push("Invalid token or expired token");
+    return res.status(400).json({ error: true, messages: errors.messages });
   }
 });
 
