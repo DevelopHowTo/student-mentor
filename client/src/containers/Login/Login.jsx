@@ -30,6 +30,7 @@ class Login extends Component {
   };
   render() {
     let content;
+    let errorMessageArr;
     if (this.props.loading) {
       // Show spinner on loading
       content = <div className="loader">Loading...</div>;
@@ -38,6 +39,9 @@ class Login extends Component {
       content = <Redirect to="/admin/dashboard" />;
     } else {
       // Show login form if not logged in
+      if (this.props.error) {
+        errorMessageArr = this.props.errorMessageArr;
+      }
       content = (
         <form onSubmit={this.handleForm}>
           <input
@@ -60,14 +64,21 @@ class Login extends Component {
         </form>
       );
     }
-    return <div className="Login__container">{content}</div>;
+    return (
+      <div className="Login__container">
+        <span className="errors">{errorMessageArr}</span>
+        {content}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    error: state.auth.error,
+    errorMessageArr: state.auth.errorMessageArr
   };
 };
 

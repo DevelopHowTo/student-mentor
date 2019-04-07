@@ -5,6 +5,9 @@
   justify-content: center;
   align-items: center;
 }
+.errors {
+  color: red;
+}
 .loader,
 .loader:before,
 .loader:after {

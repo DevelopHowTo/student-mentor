@@ -32,13 +32,13 @@ export const authInit = data => {
       .then(res => res.json())
       .then(response => {
         if (!response.success) {
-          return dispatch(authError(response.error));
+          return dispatch(authError(response.messages));
         }
         localStorage.setItem("token", response.token);
         return dispatch(getUser());
       })
       .catch(err => {
-        return dispatch(authError(err));
+        return dispatch(authError([err]));
       });
   };
 };
@@ -55,15 +55,15 @@ export const getUser = () => {
       })
       .catch(err => {
         localStorage.removeItem("token");
-        return dispatch(authError(err));
+        return dispatch(authError([err]));
       });
   };
 };
-export const authError = error => {
+export const authError = errorMessageArr => {
   return {
     type: actionTypes.AUTH_ERROR,
     payload: {
-      errorMessage: error
+      errorMessageArr
     }
   };
 };

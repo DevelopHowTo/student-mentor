@@ -8,7 +8,7 @@ const initialState = {
   isLoggedIn: false,
   loading: false,
   error: false,
-  errorMessage: ""
+  errorMessageArr: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: true,
-        errorMessage: action.payload.errorMessage
+        errorMessageArr: action.payload.errorMessageArr
       };
     case actionTypes.LOGIN_SUCCESS:
       return {
@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
         isLoggedIn: true,
         loading: false,
         error: false,
-        errorMessage: ""
+        errorMessageArr: []
       };
     case actionTypes.LOGOUT:
       return {
