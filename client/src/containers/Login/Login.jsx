@@ -32,7 +32,7 @@ class Login extends Component {
     let content;
     if (this.props.loading) {
       // Show spinner on loading
-      content = <h1>Loading...</h1>;
+      content = <div className="loader">Loading...</div>;
     } else if (this.props.isLoggedIn) {
       // Redirect to dashboard after login
       content = <Redirect to="/admin/dashboard" />;
