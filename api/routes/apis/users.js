@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const mailer = require("../../resetPassword/mailer");
-const tokenGenerate = require('../../resetPassword/generateToken');
+const tokenGenerate = require("../../resetPassword/generateToken");
 const passport = require("passport");
 
 //Load input Register
@@ -14,12 +14,11 @@ const validateLoginInput = require("../../validation/login");
 const validateForgotPassword = require("../../validation/forgotPassword");
 const validateResetPassword = require("../../validation/resetPassword");
 
-
 //User model
 const User = require("../../models/User");
 
 //Sign Token
-signToken = (payload) => {
+signToken = payload => {
   return jwt.sign(payload, keys.secretOrkey, {
     expiresIn: "24h"
   });
@@ -164,7 +163,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
 //Get api/users/forgot
 //Registration user
 //access- public
@@ -191,42 +189,50 @@ router.post("/forgot", async (req, res) => {
     }
 
     //Token Generate for reset Password
-    const token = await tokenGenerate.generateToken().catch((err) => console.log(`Error occur in generatong token ${err}`));
+    const token = await tokenGenerate
+      .generateToken()
+      .catch(err => console.log(`Error occur in generatong token ${err}`));
     console.log(token);
     user.resetPasswordToken = token;
     user.resetPasswordExpires = Date.now() + 3600000; //1 hr
-    await user.save().catch((err) => console.log(`Error in saving the token into database`));
+    await user
+      .save()
+      .catch(err => console.log(`Error in saving the token into database`));
 
     //mailing token
-    const link = `${req.protocol}://${req.headers.host}/api/users/reset/${token}`;
-    await mailer.sendMail(email, link).catch((err) => console.log(`Error in sending Link ${err}`))
-    success.sended = `Link is sended successfully to ${email}`
-    res.json({ success: success.sended })
+    const link = `${req.protocol}://${
+      req.headers.host
+    }/api/users/reset/${token}`;
+    await mailer
+      .sendMail(email, link)
+      .catch(err => console.log(`Error in sending Link ${err}`));
+    success.sended = `Link is sended successfully to ${email}`;
+    res.json({ success: success.sended });
   } catch (error) {
-    res.status(400).json(`error Occure`)
+    res.status(400).json(`error Occure`);
   }
-})
-
+});
 
 //Get api/users/reset/:token
 //Registration user
 //access- public
-router.post('/reset/:token', async (req, res) => {
+router.post("/reset/:token", async (req, res) => {
   const { errors, isValid } = validateResetPassword(req.body);
 
   try {
-    const user = await User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } });
-
+    const user = await User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
 
     if (!user) {
-      errors.token = "Invalid token or expired token"
-      return res.status(400).json({ error: errors.token })
+      errors.token = "Invalid token or expired token";
+      return res.status(400).json({ error: errors.token });
     }
     //Check Validation
     if (!isValid) {
       return res.status(400).json(errors);
     }
-
 
     user.password = req.body.password;
     bcrypt.genSalt(10, (err, salt) => {
@@ -257,13 +263,11 @@ router.post('/reset/:token', async (req, res) => {
         }
       });
     });
-
   } catch (error) {
-    errors.token = "Invalid token or expired token"
-    return res.status(400).json({ error: errors.token })
+    errors.token = "Invalid token or expired token";
+    return res.status(400).json({ error: errors.token });
   }
-
-})
+});
 
 //Get api/users/current
 //Return current user
@@ -278,7 +282,9 @@ router.get(
     res.json({
       id: req.user.id,
       name: req.user.name,
-      email: req.user.email
+      email: req.user.email,
+      mobile: req.user.mobile,
+      avatar: req.user.avatar
     });
   }
 );

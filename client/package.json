@@ -2,6 +2,7 @@
   "name": "student-mentor-client",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@types/react": "16.8.7",
     "bootstrap": "4.3.1",

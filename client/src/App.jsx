@@ -5,6 +5,8 @@ import AdminLayout from "./layouts/Admin/Admin";
 import Login from "./containers/Login/Login";
 import NotFound from "./components/404/404";
 
+import "./App.css";
+
 class App extends Component {
   render() {
     return (
