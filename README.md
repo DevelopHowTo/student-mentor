@@ -13,3 +13,7 @@ Steps to run client server:
 1.) Make sure the api server is running first!
 2.) Open your terminal/cmd inside 'client' folder and run 'npm install' to install the dependencies.
 3.) While in 'client' folder run 'npm start' and let the client server start.
+
+IMPORTANT!
+
+In api/config/keys.js file replace your credentials for mail
