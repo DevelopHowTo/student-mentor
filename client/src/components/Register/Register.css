@@ -1,0 +1,54 @@
+.Register__container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.Register__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: rgb(82, 86, 110);
+  border-radius: 20px;
+  max-width: 800px;
+  max-height: 800px;
+  min-height: 200px;
+  min-width: 200px;
+  width: 40vw;
+  padding: 20px;
+}
+.Register__form label {
+  display: block;
+  margin-bottom: 10px;
+}
+.Register__form__control {
+    margin: 10px 0;
+}
+.Register__form__control input {
+  width: 100%;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  background-color: transparent;
+  outline: none;
+  color: #ccc;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.Register__form input[type="submit"] {
+  align-self: center;
+  border: none;
+  padding: 1rem 2rem;
+  font: inherit;
+  outline: none;
+  cursor: pointer;
+  background-color: dodgerblue;
+  color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+}
+.errors {
+  color: red;
+}

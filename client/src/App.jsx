@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Switch, Redirect, Route, withRouter } from "react-router-dom";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 import NotFound from "./components/404/404";
 import * as actionTypes from "./store/actions/actionTypes";
 import Loader from "./components/Loader/Loader";
@@ -26,6 +27,7 @@ class App extends Component {
           ) : null}
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route component={NotFound} />
         </Switch>
       );
