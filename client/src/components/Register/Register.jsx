@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as AuthActions from "../../store/actions/auth";
+import { Redirect } from "react-router-dom";
 import "./Register.css";
 import Loader from "../Loader/Loader";
 
@@ -22,7 +23,10 @@ class Register extends Component {
     // Dispatch authInit with user and type as "Register"
     const user = {
       email: this.state.email,
-      password: this.state.password
+      name: this.state.name,
+      mobile: this.state.mobile,
+      password: this.state.password,
+      password2: this.state.password2
     };
     this.props.handleForm({ user, type: "Register" });
   };
@@ -32,10 +36,14 @@ class Register extends Component {
     if (this.props.loading) {
       // Show Loader
       content = <Loader />;
+    } else if (this.props.isLoggedIn) {
+      content = <Redirect to="/dashboard" />;
     } else {
-      // Show login form if not logged in
+      // Show register form if not registered
       if (this.props.error) {
-        errorMessageArr = this.props.errorMessageArr;
+        errorMessageArr = this.props.errorMessageArr.map((error, i) => {
+          return <span key={i}>{error}</span>;
+        });
       }
       content = (
         <form onSubmit={this.handleForm} className="Register__form">
@@ -95,7 +103,7 @@ class Register extends Component {
     }
     return (
       <div className="Register__container">
-        <span className="errors">{errorMessageArr}</span>
+        <div className="errors">{errorMessageArr}</div>
         {content}
       </div>
     );
@@ -106,7 +114,8 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    errorMessageArr: state.auth.errorMessageArr
+    errorMessageArr: state.auth.errorMessageArr,
+    isLoggedIn: state.auth.isLoggedIn
   };
 };
 

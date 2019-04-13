@@ -24,7 +24,7 @@
   margin-bottom: 10px;
 }
 .Register__form__control {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 .Register__form__control input {
   width: 100%;
@@ -51,4 +51,6 @@
 }
 .errors {
   color: red;
+  display: flex;
+  flex-direction: column;
 }
