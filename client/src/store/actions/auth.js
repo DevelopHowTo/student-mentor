@@ -34,8 +34,20 @@ export const authInit = data => {
         if (!response.success) {
           return dispatch(authError(response.messages));
         }
+        // Set received token
         localStorage.setItem("token", response.token);
-        return dispatch(getUser());
+
+        // find the user from token
+        return getUser()
+          .then(user => {
+            return dispatch(
+              authSuccess({ user, type: actionTypes.LOGIN_SUCCESS })
+            );
+          })
+          .catch(err => {
+            localStorage.removeItem("token");
+            return dispatch(authError([err]));
+          });
       })
       .catch(err => {
         return dispatch(authError([err]));
@@ -43,13 +55,21 @@ export const authInit = data => {
   };
 };
 export const getUser = () => {
+  return fetch("/api/users/current", {
+    headers: {
+      Authorization: localStorage.getItem("token")
+    }
+  }).then(res => res.json());
+};
+
+export const checkLogin = () => {
   return dispatch => {
-    return fetch("/api/users/current", {
-      headers: {
-        Authorization: localStorage.getItem("token")
-      }
-    })
-      .then(res => res.json())
+    dispatch({ type: actionTypes.AUTH_START });
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return dispatch({ type: actionTypes.LOGOUT });
+    }
+    return getUser()
       .then(user => {
         return dispatch(authSuccess({ user, type: actionTypes.LOGIN_SUCCESS }));
       })

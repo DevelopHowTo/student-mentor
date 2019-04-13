@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as AuthActions from "../../store/actions/auth";
 import "./Login.css";
+import Loader from '../Loader/Loader';
 
 class Login extends Component {
   state = {
@@ -32,8 +33,8 @@ class Login extends Component {
     let content;
     let errorMessageArr;
     if (this.props.loading) {
-      // Show spinner on loading
-      content = <div className="loader">Loading...</div>;
+      // Show Loader
+      content = <Loader />;
     } else if (this.props.isLoggedIn) {
       // Redirect to dashboard after login
       content = <Redirect to="/dashboard" />;
