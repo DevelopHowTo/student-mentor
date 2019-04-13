@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Switch, Redirect, Route, withRouter } from "react-router-dom";
-import AdminLayout from "./layouts/Admin/Admin";
-import Login from "./containers/Login/Login";
+import Dashboard from "./containers/Dashboard/Dashboard";
+import Login from "./components/Login/Login";
 import NotFound from "./components/404/404";
 
 import "./App.css";
@@ -12,9 +12,9 @@ class App extends Component {
     return (
       <Switch>
         {!this.props.isLoggedIn ? (
-          <Redirect from="/admin/dashboard" to="/login" />
+          <Redirect from="/dashboard" to="/login" />
         ) : null}
-        <Route path="/admin/dashboard" exact component={AdminLayout} />
+        <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route component={NotFound} />
       </Switch>

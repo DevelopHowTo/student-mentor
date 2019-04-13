@@ -5,9 +5,6 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-import "./assets/scss/black-dashboard-react.scss";
-import "./assets/demo/demo.css";
-import "./assets/css/nucleo-icons.css";
 import authReducer from "./store/reducers/auth";
 
 import App from "./App";
