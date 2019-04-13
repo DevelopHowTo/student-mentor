@@ -40,17 +40,20 @@ export const authInit = data => {
         // find the user from token
         return getUser()
           .then(user => {
+            if (!user) {
+              dispatch(authError(["Invalid email/password"]));
+            }
             return dispatch(
               authSuccess({ user, type: actionTypes.LOGIN_SUCCESS })
             );
           })
           .catch(err => {
             localStorage.removeItem("token");
-            return dispatch(authError([err]));
+            return dispatch(authError([err.message]));
           });
       })
       .catch(err => {
-        return dispatch(authError([err]));
+        return dispatch(authError([err.message]));
       });
   };
 };
@@ -71,11 +74,14 @@ export const checkLogin = () => {
     }
     return getUser()
       .then(user => {
+        if (!user) {
+          dispatch(authError(["Invalid email/password"]));
+        }
         return dispatch(authSuccess({ user, type: actionTypes.LOGIN_SUCCESS }));
       })
       .catch(err => {
         localStorage.removeItem("token");
-        return dispatch(authError([err]));
+        return dispatch(authError([err.message]));
       });
   };
 };
