@@ -43,23 +43,27 @@ class Login extends Component {
         errorMessageArr = this.props.errorMessageArr;
       }
       content = (
-        <form onSubmit={this.handleForm}>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            onChange={this.handleEmail}
-            required
-            placeholder="Email"
-          />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={this.handlePassword}
-            required
-            placeholder="Password"
-          />
+        <form onSubmit={this.handleForm} className="Login__form">
+          <div className="Login__form__control">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              onChange={this.handleEmail}
+              required
+            />
+          </div>
+          <div className="Login__form__control">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={this.handlePassword}
+              required
+            />
+          </div>
           <input type="submit" value="Login" />
         </form>
       );
