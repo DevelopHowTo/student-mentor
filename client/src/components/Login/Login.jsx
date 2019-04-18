@@ -37,7 +37,7 @@ class Login extends Component {
       content = <Loader />;
     } else if (this.props.isLoggedIn) {
       // Redirect to dashboard after login
-      content = <Redirect to="/dashboard" />;
+      content = <Redirect to="/dashboard?tab=Dashboard" />;
     } else {
       // Show login form if not logged in
       if (this.props.error) {

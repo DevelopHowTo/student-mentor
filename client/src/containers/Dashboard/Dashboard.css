@@ -1,0 +1,58 @@
+.Dashboard__nav {
+  /* margin-bottom: 20px; */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  padding: 0 20px;
+  align-items: center;
+  font-weight: 300;
+}
+.btn-logout {
+  transition: 0.3s;
+}
+.btn-logout:hover {
+  color: rgb(231, 75, 75);
+}
+.Dashboard__main {
+  padding: 20px;
+}
+.Dashboard__sideDrawer {
+  height: 84vh;
+  width: 15vw;
+  border-radius: 10px;
+  border: 1px solid #1d1d1d;
+  color: #ddd;
+  background: linear-gradient(0deg, #3358f4, #1d8cf8);
+}
+.Dashboard__sideDrawer hr {
+  width: 80%;
+  height: 1px;
+  border: none;
+  background-color: #eee;
+}
+.Dashboard__sideDrawer h3 {
+  font-weight: 300;
+  text-align: center;
+  margin: 20px;
+  color: #fff;
+}
+
+.Dashboard__sideList {
+  font-weight: 300;
+  font-size: 0.95rem;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  padding-left: 3rem;
+  margin-top: 20%;
+  height: 60%;
+  justify-content: space-between;
+}
+.Dashboard__sideList__item{
+  cursor: pointer;
+}
+.Dashboard__sideList__item:hover,
+.Dashboard__sideList__item--active {
+  color: #fff;
+}

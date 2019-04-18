@@ -25,7 +25,7 @@ class App extends Component {
           {!this.props.isLoggedIn ? (
             <Redirect from="/dashboard" to="/login" />
           ) : null}
-          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route component={NotFound} />
