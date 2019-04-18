@@ -7,6 +7,7 @@
   padding: 0 20px;
   align-items: center;
   font-weight: 300;
+  border-bottom: 1px solid #3f3f3f;
 }
 .btn-logout {
   transition: 0.3s;
@@ -16,10 +17,13 @@
 }
 .Dashboard__main {
   padding: 20px;
+  display: flex;
+  height: 90vh;
 }
 .Dashboard__sideDrawer {
-  height: 84vh;
+  height: 100%;
   width: 15vw;
+  margin-right: 20px;
   border-radius: 10px;
   border: 1px solid #1d1d1d;
   color: #ddd;
@@ -44,15 +48,29 @@
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-  padding-left: 3rem;
+  padding-left: 2rem;
   margin-top: 20%;
   height: 60%;
   justify-content: space-between;
 }
 .Dashboard__sideList__item{
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.Dashboard__sideList__item i {
+  margin-right: 7px;
+  font-size: 1.2rem;
 }
 .Dashboard__sideList__item:hover,
 .Dashboard__sideList__item--active {
   color: #fff;
+}
+
+
+.Dashboard__section {
+  height: 100%;
+  flex: 1;
+  border-left: 1px solid #3f3f3f;
+  padding-left: 20px;
 }

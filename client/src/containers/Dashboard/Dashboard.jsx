@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actions/actionTypes";
+import Profile from "./Profile/Profile";
 import "./Dashboard.css";
 import qs from "qs";
 
@@ -18,6 +19,12 @@ class Dashboard extends Component {
     const query = qs.parse(this.props.location.search, {
       ignoreQueryPrefix: true
     });
+    const iconClass = [
+      "fas fa-chart-pie",
+      "fas fa-user",
+      "far fa-id-card",
+      "fas fa-search"
+    ];
     let heading = "Dashboard";
     if (this.state.tabs.includes(query.tab)) {
       heading = query.tab;
@@ -29,10 +36,13 @@ class Dashboard extends Component {
       }
       return (
         <li key={i} className={listItemClasses.join(" ")}>
+          <i className={iconClass[i]} />
           {item}
         </li>
       );
     });
+
+    let content = <Profile />;
     return (
       <Fragment>
         <nav className="Dashboard__nav">
@@ -47,6 +57,7 @@ class Dashboard extends Component {
             <hr />
             <ul className="Dashboard__sideList">{listItems}</ul>
           </aside>
+          <section className="Dashboard__section">{content}</section>
         </main>
       </Fragment>
     );
